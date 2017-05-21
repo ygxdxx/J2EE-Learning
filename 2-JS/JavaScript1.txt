@@ -1,0 +1,69 @@
+1.JavaScript简介
+    * JavaScript是基于对象和事件驱动的语言
+        - 基于对象：JS内置了许多对象
+        - 事件驱动：由用户的动作驱动
+    * JavaScript的特点
+        (1) 交互性
+        (2) 安全性
+        (3) 跨平台性
+        (4) 弱类型语言
+    * JavaScript的组成
+        (1) ECMAScript
+            - ECMA：欧洲计算机协会
+            - 由这个组织制定JS的语法
+        (2) DOM
+            - Document Object Model：文档对象模型
+        (3) BOM
+            - Browser Object Model：浏览器对象模型
+2.JavaScript与HTML的结合方式
+        (1)在HTML文件内 使用<script type="text/javascript">..Code..</script>
+        (1)在HTML文件内 使用<script type="text/javascript" src="fileName.js"></script>
+3.JavaScript的原始类型和声明变量
+        * 定义任何类型变量都是用var
+            - var str = "test";
+            - var num = 101;
+        * 原始类型
+            - string：字符串
+            - number：数字
+            - boolean：布尔
+            - null：对象为空
+            - undefined：定义一个变量，但是没有赋值
+        * typeof()：查看当前变量的数据类型
+ 4.JavaScript中的语句
+        * 与其他语言一致
+            -if for while do-while switch...
+ 5.JavaScript中的运算符
+        * 不区分整数与小数
+            - var a = 233;
+              var r = a/1000*1000 //r = 233 not 0
+        * 字符串可以进行相减操作
+        * NaN：Not A Number 不是一个数字类型
+        * ==、===：前者只判断值是否相等，后者既比较值又比较类型
+ 6.JavaScript中的数组
+        * 数组中不限定数据类型
+            - var arr = [1,2,3];
+            - var arr = [1,"2",a];
+        * var arr = new Array(3);
+          arr[0] = 1;
+        * var arr = new Array(1,2,3);
+        * 数组长度属性length
+ 7.JavaScript中的函数
+        * 参数不需要写var
+        * 常规定义
+            - function 方法名(参数列表){
+                  方法体;
+                  返回值;(可以没有)
+               }
+        * 匿名函数
+            - var func = function 方法名(参数列表){
+                            方法体;
+                         }
+              func(参数列表);
+        * 内置函数对象
+            - var func = new Function("x,y","var sum;sum = x + y;return sum");
+              func(3,4);
+ 8.JavaScript中的全局变量和局部变量
+        * 全局变量：在<script>内定义一个变量，内部都可以引用
+        * 局部变量：在方法内定义一个变量，只能在当前函数内部引用
+ 9.JavaScript标签摆放的位置
+        * 在body标签的后面，尽量让页面先进行加载

@@ -1,0 +1,57 @@
+1.JS中的String对象
+    * 创建字符串对象
+        var str = "test";
+    ** 属性
+        - length：返回字符串长度
+    ** 方法
+        - bold()：加粗
+        - fontSize()：字体大小
+        - fontColor()：字体颜色
+        - link()：变为链接地址
+        - sub()：把字符串设置为下标
+        - sup()：把字符串设置为上标
+
+        - concat()：连接
+        - indexOf()：返回字符位置 从0开始 不存在返回-1
+        - charAt()：返回对应位置的字符 不存在则返回空字符串
+        - split()：切分成字符串数组
+        - replace()：替换
+        - subStr()：从指定位置开始，向后截取X位字符
+        - subString()：从指定位置开始，到哪个位置结束（不包含）
+2.JS中的Array对象
+    * 创建数组
+        var arr = [1,2,3]
+        var arr = new Array(3);
+        var arr = new Array(1,2,3);
+    * 属性
+        - length 返回数组的长度
+    * 方法
+        - join()：以指定字符分割数组并打印
+        - concat()：拼接数组
+        - push()：向数组末尾添加元素，并返回新的长度
+        - pop()：删除并返回最后一个元素
+        - reverse()：颠倒数组元素的顺序
+3.JS中的Date对象
+    * 获取日期
+        - Date date = new Date()
+        - toLocalString()：转换成本地时间
+        - getFullYear()：获取当前年份
+        - getMonth()：获取当前月份 0 - 11
+        - getDay()：0 - 6
+        - getDate()：得到当前的天 1- 31
+        - getHours()：得到当前的小时
+        - ...
+        - getTime()：得到毫秒数
+
+4.JS中的Math对象
+        略..
+5.JS中的全局函数
+        * 不属于任何对象，可直接调用
+        * 方法
+            - eval()：执行JS代码，如果字符串是JS代码可以直接作为参数执行
+            - encodeURI()：对字符进行编码，有一部分字符不进行编码
+            - decodeURI()：对字符进行解码 对应上面的函数
+            - isNaN()：判断是否为数字 不是数字为true 是数字为false -> is Not A Number
+            - parseXXX()：把字符串转换为对应的类型
+6.JS中不存在重载函数
+        * 传递的多余参数都保存在名为arguments的数组里面，可以在函数当中直接调用获取
