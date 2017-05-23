@@ -111,4 +111,43 @@
 * 语法：`<!ENTITY 实体名称 "实体的值">`
 * 使用实体：`&实体名称;`  
 * 注意事项：使用实体一般写在内部的DTD中，外部有时不能引用（高版本浏览器）
-              
+---
+#### 8. XML的解析
+1. DOM解析技术
+    - 根据XML层级结构在内存中分配一个树形结构，把XML标签、属性、文本都封装成对象
+    - 如果文件过大，则会造成内存溢出
+    - 增删改查操作非常方便
+2. SAX解析技术    
+    - 采用事件驱动，一边读取一边解析
+    - 不能实现增删改操作
+    - 哪怕文件过大也不会造成内存溢出
+3. XML解析器：不同公司提供了不同的解析器
+    - sun公司提供了针对DOM和SAX两种方式的解析器 JAXP
+    - dom4j组织针对DOM和SAX提供解析器 dom4j
+    - jdom组织针对dom和sax解析器 jdom 
+---
+#### 9. JAXP的API
+* JAXP是JavaSE的一部分
+* JAXP解析器在`javax.xml.parsers`内    
+    - DOM
+        * `DocumentBuilder`：解析器类
+            - 这是一个抽象类，不能实例化
+            - `使用DocumentBuilderFactory.newDocumentBuilder()`进行获取
+            - `parse("xml文件路径)` 返回的是整个Document文档(w3c)  
+            - Document是一个接口，其父接口为Node
+            - **方法**
+                * `getElementsByTagName(String tagName)` 返回NodeList，一个节点集合
+                * `createElement(String tagName)` 创建标签
+                * `createTextNode()` 创建文本
+                * `appendChild(Node newNode)` 把一个节点添加到另一个节点的下面
+                * `removeChild(Node oldNode)` 删除节点，由父节点调用
+                * `getParentNode()` 得到父节点
+                * **NodeList()** 
+                    - `getLength()`：得到节点的数量
+                    - `item(int index)`：得到具体位置的节点
+                    - `getTextContent()`：得到节点内的值            
+        * 实现节点的增、删、改、查操 作        
+            - ***代码实现***
+        * `DocumentBuilderFactory`：解析器工厂   
+            - 这是一个抽象类，不能实例化
+            - `newInstance()` 获取 `DocumentBuilderFactory `的实例                                                    
