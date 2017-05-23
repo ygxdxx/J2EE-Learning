@@ -2,3 +2,7 @@
         <!ELEMENT name (#PCDATA)>
         <!ELEMENT age (#PCDATA)>
         <!ELEMENT sex (#PCDATA)>
+        <!ATTLIST name id CDATA #FIXED 101>
+        <!ATTLIST age value (18|19|20) #REQUIRED>
+        <!ATTLIST sex s ID #IMPLIED> 
+        <!ENTITY e "测试"> <!--实体-->

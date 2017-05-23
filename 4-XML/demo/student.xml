@@ -2,6 +2,6 @@
 <!DOCTYPE student SYSTEM "student.dtd">
 <student>
     <name>小明</name>
-    <age>18</age>
-    <sex>男</sex>
+    <age value="18">18</age>
+    <sex>&e;</sex>
 </student>
