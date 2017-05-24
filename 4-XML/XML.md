@@ -150,4 +150,21 @@
             - ***代码实现***
         * `DocumentBuilderFactory`：解析器工厂   
             - 这是一个抽象类，不能实例化
-            - `newInstance()` 获取 `DocumentBuilderFactory `的实例                                                    
+            - `newInstance()` 获取 `DocumentBuilderFactory `的实例
+#### 10. dom4j
+* dom4j是一个组织，提供了XML解析器 dom4j
+* 添加jar包...
+* 得到document
+    - `SAXReader reader = new SAXReader();`
+    - `Document document = reader.read(url);`
+* **Document**方法
+    - `getRootElement()` 获取根节点，返回Element
+* **Element**方法
+    - `getParent()`：获取父节点
+    - `addElement()`：添加节点   
+    - `elements()`：得到当前元素下的所有子标签
+    - `elements(qName)`：或                                                                     
+* ***Document和Element的父接口都是Node***
+
+        
+    
