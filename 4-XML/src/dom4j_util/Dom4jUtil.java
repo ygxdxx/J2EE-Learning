@@ -18,8 +18,9 @@ public class Dom4jUtil {
 
     public static Document getDocument(String docPath) {
         try {
-            SAXReader saxReader = new SAXReader(docPath);
-            return saxReader.read(docPath);
+            SAXReader saxReader = new SAXReader();
+            Document document = saxReader.read(docPath);
+            return document;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -30,6 +31,7 @@ public class Dom4jUtil {
         try {
             XMLWriter xmlWriter = new XMLWriter(new FileOutputStream(docPath), OutputFormat.createPrettyPrint());
             xmlWriter.write(document);
+            xmlWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

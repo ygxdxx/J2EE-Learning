@@ -5,6 +5,8 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,11 +30,34 @@ public class Dom4jParserTest {
         //selectNodeText();
         //addNode();
         //addSpecificIndexNode();
-        modifyNodeText();
+        //modifyNodeText();
+        //delElement();
+        getAttributeValue();
     }
 
-    private static void modifyNodeText() {
-        Document document = Dom4jUtil.getDocument("/Users/Cortana/IdeaProjects/JavaWeb/4-XML/XMLdemo/student.xml");
+    private static void getAttributeValue() {
+        Document document = Dom4jUtil.getDocument(docPath);
+        Element rootElement = document.getRootElement();
+        Element headStuElement = rootElement.element("s");
+        if (headStuElement.attributeCount() != 0) {
+            //get value of attribute
+            String attrValue = headStuElement.attributeValue("id");
+            System.out.println(attrValue);
+        }
+    }
+
+    private static void delElement() {
+        Document document = Dom4jUtil.getDocument(docPath);
+        Element rootElement = document.getRootElement();
+        Element headStudentElement = rootElement.element("s");
+        Element gradeElement = headStudentElement.element("sex");
+        //remove element
+        headStudentElement.remove(gradeElement);
+        Dom4jUtil.writeBackToXmL(docPath, document);
+    }
+
+    private static void modifyNodeText() throws SAXException {
+        Document document = Dom4jUtil.getDocument(docPath);
         if (document != null) {
             Element rootElement = document.getRootElement();
             Element studentElement = rootElement.element("s");
@@ -40,7 +65,7 @@ public class Dom4jParserTest {
             System.out.println(schoolElement.getText());
             schoolElement.setText("SUT");
             //write back to XML
-            //Dom4jUtil.writeBackToXmL(docPath,document);
+            Dom4jUtil.writeBackToXmL(docPath, document);
         }
     }
 

@@ -175,11 +175,26 @@
 5. 回写XML文件
 * 创建新的元素 `DocumentHelper.createElement()`
 * 对元素添加文本 `Element.setText("...")`
-* 插入到元素列表中 `List.add(int index,Element e)`
-* ...
 
 #### 12. 获取document、写回XML文件进行方法封装
 * 略...
 
+#### 13. XPath简介
+* 通过路径访问的方式获取到XML文件中的元素
+* Xpath的写法
+    1. `/A/B/C`：表示A节点下面的 B下面的 C节点
+    2. `//A`：表示和这个名称相同，表示质只要A，都会得到
+    3. `/*`：表示所有元素都得到
+    4. `A[1]`：表示第一个A元素
+    5. `A[last()]`：表示最后一个A元素
+    6. `//A[@id]`：表示只有A元素上有id属性就都获取
+    7. `//A[@id='a']`：表示只有A元素上有id属性，且属性值为a则都获取
+    8. ...
+#### 14. 在dom4j中使用Xpath
+* 默认情况下，dom4j本身不支持Xpath，所以需要引入额外的包 `jaxen.jar`
+* dom4j使用xpath的两种方式
+    1. `selectNodes("xpath..")`：获取多个节点
+    2. `selectSingleNode("xpath...")`： 获取单个节点
+* 使用Xpath实现对XML的增、删、改、查    
         
     

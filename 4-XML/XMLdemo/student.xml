@@ -2,16 +2,20 @@
 
 <!--<!DOCTYPE student SYSTEM "student.dtd">-->
 <student> 
-  <s> 
+  <s id="xiaoming"> 
     <name>小明</name>  
-    <school>STU</school>
+    <school>SUT</school>  
     <age value="18">18</age>  
-    <sex>男</sex>  
     <grade>A001</grade> 
   </s>  
   <s> 
     <name>小红</name>  
     <age value="18">19</age>  
     <sex>男</sex> 
-  </s> 
+  </s>  
+  <stu>
+    <name>小丸子</name>
+    <age>6</age>
+    <grade>A003</grade>
+  </stu>
 </student>
