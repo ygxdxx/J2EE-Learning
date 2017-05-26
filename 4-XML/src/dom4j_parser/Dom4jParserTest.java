@@ -1,9 +1,12 @@
 package dom4j_parser;
 
+import dom4j_util.Dom4jUtil;
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -11,23 +14,75 @@ import java.util.List;
  * email: wangsongyan921@163.com
  */
 public class Dom4jParserTest {
+
+    private static final String docPath = "/Users/Cortana/IdeaProjects/JavaWeb/4-XML/XMLdemo/student.xml";
+
     public static void main(String[] args) throws Exception {
-        /**
-         * 1.创建解析器
-         * 2.得到document
-         * 3.得到根节点
+        /*
+         * 1.create dom4j parser
+         * 2.get document
+         * 3.get root of elements
+         * ....
          */
-        selectName();
+
+        //selectNodeText();
+        //addNode();
+        //addSpecificIndexNode();
+        modifyNodeText();
     }
 
-    private static void selectName() throws Exception {
-        SAXReader saxReader = new SAXReader();
-        Document document  = saxReader.read("/Users/Cortana/IdeaProjects/JavaWeb/4-XML/XMLdemo/student.xml");
-        Element rootElement = document.getRootElement();
-        List<Element> elements = rootElement.elements();
-        for (Element e : elements) {
-            System.out.println(e.getText());
+    private static void modifyNodeText() {
+        Document document = Dom4jUtil.getDocument("/Users/Cortana/IdeaProjects/JavaWeb/4-XML/XMLdemo/student.xml");
+        if (document != null) {
+            Element rootElement = document.getRootElement();
+            Element studentElement = rootElement.element("s");
+            Element schoolElement = studentElement.element("school");
+            System.out.println(schoolElement.getText());
+            schoolElement.setText("SUT");
+            //write back to XML
+            //Dom4jUtil.writeBackToXmL(docPath,document);
         }
+    }
+
+    private static void addSpecificIndexNode() throws DocumentException, IOException {
+        Document document = Dom4jUtil.getDocument(docPath);
+        Element firstStudentElement = document.getRootElement().element("s");
+        List<Element> allElements = firstStudentElement.elements();
+        //create new element from DocumentHelper
+        Element schoolElement = DocumentHelper.createElement("school");
+        schoolElement.setText("STU");
+        allElements.add(1, schoolElement);
+        //write back to XML
+        Dom4jUtil.writeBackToXmL(docPath, document);
+    }
+
+    private static void addNode() throws DocumentException, IOException {
+        Document document = Dom4jUtil.getDocument(docPath);
+
+        Element rootElement = document.getRootElement();
+        Element studentElement = rootElement.element("s");
+        Element gradeElement = studentElement.addElement("grade");
+        gradeElement.setText("A001");
+
+        //write back to XML document
+        Dom4jUtil.writeBackToXmL(docPath, document);
+    }
+
+    private static void selectNodeText() throws Exception {
+        Document document = Dom4jUtil.getDocument(docPath);
+        Element rootElement = document.getRootElement();
+        List<Element> elements = rootElement.elements("s");
+
+        //print names of all students
+        /*for (Element e : elements) {
+            Element name = e.element("name");
+            System.out.println(name.getText());
+        }*/
+
+        //print name of last student
+        Element elementLast = elements.get(elements.size() - 1);
+        Element name = elementLast.element("name");
+        System.out.println(name.getText());
     }
 }
 

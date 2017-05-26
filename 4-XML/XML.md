@@ -162,9 +162,24 @@
 * **Element**方法
     - `getParent()`：获取父节点
     - `addElement()`：添加节点   
-    - `elements()`：得到当前元素下的所有子标签
-    - `elements(qName)`：或                                                                     
+    - `elements()`：获取当前元素下的所有子标签
+    - `elements(qName)`：获取当前元素下的所有指定子标签
+    - `element(qName)`：获取标签下的第一个子标签                                                                     
 * ***Document和Element的父接口都是Node***
+
+#### 11. dom4j 增、删、改、查操作
+1. 创建解析器
+2. 得到document
+3. 得到根节点
+4. 得到具体节点
+5. 回写XML文件
+* 创建新的元素 `DocumentHelper.createElement()`
+* 对元素添加文本 `Element.setText("...")`
+* 插入到元素列表中 `List.add(int index,Element e)`
+* ...
+
+#### 12. 获取document、写回XML文件进行方法封装
+* 略...
 
         
     

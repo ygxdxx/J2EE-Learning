@@ -20,12 +20,6 @@ import java.io.IOException;
 public class JAXPParserTest {
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, TransformerException {
-        /**
-         * 1.创建解析器工厂
-         * 2.根据解析器工厂创建解析器
-         * 3.解析XML返回Document文档
-         * 4.得到XML文件中的所有name属性，并打印
-         */
         //selectAll();
         //selectFirst();
         //addElement();
@@ -69,7 +63,7 @@ public class JAXPParserTest {
         sexElement.appendChild(text);
         userNode.appendChild(sexElement);
 
-        //写回XML文件
+        //write back to XML document
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         transformer.transform(new DOMSource(document), new StreamResult("/Users/Cortana/IdeaProjects/JavaWeb/4-XML/XMLdemo/user.xml"));
