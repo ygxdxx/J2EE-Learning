@@ -1,4 +1,4 @@
-package com.test.servlet;
+package com.test.GenericServlet;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.io.IOException;
  * Created by wangsongyan on 2017/5/28.
  * email: wangsongyan921@163.com
  */
-public class TestServlet2 implements Servlet {
+public class MockGenericServlet implements Servlet {
 
     private ServletConfig servletConfig;
 
