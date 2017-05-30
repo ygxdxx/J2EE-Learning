@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
@@ -19,6 +20,15 @@ public class ResponseServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendError(404, "资源不存在了~！");
+        //response.sendError(404, "资源不存在了~！");
+        //response.getOutputStream()
+        //response.getWriter().print("hello response!");
+
+        FileInputStream fis = new FileInputStream("/Users/Cortana/IdeaProjects/JavaWeb/7-Request-Response/20160330_142427-01.jpeg");
+        byte[] bytes = new byte[1024];
+        int len;
+        while ((len = fis.read(bytes)) != -1) {
+            response.getOutputStream().write(bytes, 0, len);
+        }
     }
 }
