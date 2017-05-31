@@ -71,3 +71,37 @@
     5. `getQueryString()`：获取参数部分，既问号后面的部分
     6. `getRequestURI()`：获取请求URI，既项目名+Servlet路径
     7. `getRequestURL()`：获取请求URL，既不包含参数的请求路径
+* 获取请求参数：有可能在URL后面，也有可能在方法体中
+    1. `String getParameter(String name)`：获取指定名称的请求参数值，单值
+    2. `String[] getParameterValues(String name)`：获取指定名称的参数值数组，多值
+    3. `Enumeration<String> getParameterNames()`：获取所有请求参数名称
+    4. `Map<String,String[]> getParameterMap()`：获取所有请求参数键-值对
+
+---
+
+#### 4.请求转发和请求包含
+* 有时一次请求需要多个Servlet共同协作才能完成，需要从一个Servlet跳转到另一个Servlet
+* 一个请求需要跨多个Servlet，此时需要转发与包含
+    - 请求转发：由下一个Servlet完成响应体，当前Servlet只保留响应头
+    - 请求包含：由两个Servlet共同完成响应体，第二个Servlet会接收到第一个Servlet的请求体
+    - 无论是请求转发/请求包含，都在一个请求范围内。使用了同一个request和response
+    <br>`RequestDispatcher rd = request.getRequestDispatcher("Servlet")`
+    <br>**请求转发**：`rd.forward(request,response);`：内部有缓存机制，第一个Servlet不需要设置响应体，不要进行过多操作
+    <br>**请求包含**：`rd.include(request,response);`：第一个Servlet设置的响应体，第二个Servlet也可以接收到
+- request域
+    - Servlet中三大域对象：request,session,application
+        - 共同方法：
+            1. `setAttribute(String name,Object value)`
+            2. `getAttribute(string name)`
+            3. `removeAttribute(String name)`
+        - 同一请求范围内可使用上述方法进行值的传递，前一个设置值，后一个取值
+- 请求转发和重定向的区别
+    1. 请求转发是一个请求一次响应，而重定向是两次请求两次相应
+    2. 请求转发地址栏不发生变化，而重定向会显示后一个请求的地址
+    3. 请求转发只能转发到本项目的其他Servlet,而重定向可以访问其他项目的Servlet
+    4. 请求转发是服务端行为，只需给出转发的Servlet路径，而重定向需要给出requestURI，即包含项目名
+
+---
+
+#### 5.编码
+
