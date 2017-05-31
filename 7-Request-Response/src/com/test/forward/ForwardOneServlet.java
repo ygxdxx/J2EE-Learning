@@ -18,10 +18,10 @@ public class ForwardOneServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("This is First Servlet");
+        response.setHeader("Content-type", "text/html;charset=utf-8");
         response.setHeader("one", "ONE");
-        response.getWriter().print("One Servlet ");
+        response.getWriter().print("First Servlet");
         //equals invoke service of method of second Servlet
-        request.getRequestDispatcher("/ForwardTwoServlet").include(request, response);
+        request.getRequestDispatcher("/ForwardTwoServlet").forward(request, response);
     }
 }

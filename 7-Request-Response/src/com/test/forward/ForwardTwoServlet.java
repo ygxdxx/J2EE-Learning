@@ -11,14 +11,13 @@ import java.io.IOException;
  * Created by wangsongyan on 2017/5/31.
  * email: wangsongyan921@163.com
  */
-@WebServlet(name = "ForwardTwoServlet",value = "/ForwardTwoServlet")
+@WebServlet(name = "ForwardTwoServlet", value = "/ForwardTwoServlet")
 public class ForwardTwoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("This is second Servlet");
-        response.getWriter().print("Hello TwoServlet..");
+        response.getWriter().print("中文乱码测试");
     }
 }
