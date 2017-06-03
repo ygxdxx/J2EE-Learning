@@ -20,18 +20,17 @@ public class SessionServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
         //判断用户名
         if (!"admin".equalsIgnoreCase(username)) {
             //0.设置cookie
             //1.写入session
             //2.返回结果重定向
-            Cookie cookie = new Cookie("name", username);
+            Cookie cookie = new Cookie("username", username);
             cookie.setMaxAge(60 * 60);
+            response.addCookie(cookie);
 
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
-            response.addCookie(cookie);
             response.sendRedirect("/test8/testSession2/succ1.jsp");
         } else {
             //1.错误信息保存到request域

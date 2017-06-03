@@ -24,16 +24,16 @@
     %>
     <%
         String message = "";
-        String msg = (String) request.getAttribute("username");
+        String msg = (String) request.getAttribute("msg");
         if (msg != null) {
             message = msg;
         }
     %>
-    <span color="red"><%=message%></span>
+    <font color="red"><%=message%></font>
     <h1>登录页面</h1>
-    <form action="/SessionServlet" method="post">
-        <span>用户名：</span><input type="text" value="<%=cookieName%>"><br/>
-        <span>密码：</span><input type="text" value=""><br/>
+    <form action="/test8/SessionServlet" method="post">
+        <span>用户名：</span><input type="text" name="username" value="<%=cookieName%>"><br/>
+        <span>密码：</span><input type="text" name="password" value=""><br/>
         <input type="submit">
     </form>
 </body>

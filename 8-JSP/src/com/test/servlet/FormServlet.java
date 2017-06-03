@@ -23,7 +23,7 @@ public class FormServlet extends HttpServlet {
         int sum = num1 + num2;
 
         request.setAttribute("result",sum);
-        request.getRequestDispatcher("/addTest/result.jsp").forward(request,response);
+        request.getRequestDispatcher("/testJSP/result.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
