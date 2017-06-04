@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
                 //2.重定向到成功页面
                 request.getSession().setAttribute("username", username);
 
-                Cookie cookie = new Cookie("username", username);
+                Cookie cookie = new Cookie("usr", username);
                 cookie.setMaxAge(60 * 60);
                 response.addCookie(cookie);
                 response.sendRedirect("/loginDemo/login/success.jsp");
