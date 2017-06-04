@@ -1,13 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Cortana
-  Date: 2017/6/4
-  Time: 21:38
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.test.el.*" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -16,17 +10,25 @@
 <body>
     <%
         Address address = new Address();
-        address.setCity("北京");
-        address.setStreet("昌平");
+        address.setCity("beijing");
+        address.setStreet("street");
 
         User user = new User();
         user.setName("小明");
         user.setSalary(5000);
         user.setAddress(address);
-
-        request.setAttribute("user", user);
     %>
-    <h1>获取域内容</h1>
-    ${requestScope.user.address.city}
+
+    ${ requestScope.user.address.city }
+
+    <c:out value="${value}"/>
+
+    <c:set var="" value="" scope="session"/>
+
+    <c:remove var="" scope="session"/>
+
+    <c:url value="el.jsp">
+        <c:param name="key" value="value"/>
+    </c:url>
 </body>
 </html>
