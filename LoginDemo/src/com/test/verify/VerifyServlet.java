@@ -9,24 +9,25 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * Created by wangsongyan on 2017/6/3.
+ * Created by wangsongyan on 2017/6/4.
  * email: wangsongyan921@163.com
  */
-@WebServlet(name = "VerifyCodeServlet", value = "/VerifyCodeServlet")
-public class VerifyCodeServlet extends HttpServlet {
+@WebServlet(name = "VerifyServlet", value = "/VerifyServlet")
+public class VerifyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /**
-         * 1.生成图片
-         * 2.把图片保存到 session 域中
-         * 3.把图片响应给客户端
-         */
         VerifyCode verifyCode = new VerifyCode();
         BufferedImage image = verifyCode.getImage();
-        request.getSession().setAttribute("vcode", verifyCode.getText());
 
+        //将生成的验证码文本添加到 session 域中
+        //因为请求验证码图片的请求与登录验证码并非一个请求
+        //第一次访问login 页面的时候会自动发生 get 请求验证码图片
+        request.getSession().setAttribute("verify_text", verifyCode.getText());
+
+        //将图片返回到客户端
         VerifyCode.output(image, response.getOutputStream());
     }
 }

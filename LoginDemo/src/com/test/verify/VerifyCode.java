@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.util.Random;
 
 /**
- * Created by wangsongyan on 2017/6/3.
+ * Created by wangsongyan on 2017/6/4.
  * email: wangsongyan921@163.com
  */
 public class VerifyCode {
@@ -101,6 +101,3 @@ public class VerifyCode {
         ImageIO.write(image, "JPEG", out);
     }
 }
-
-
-
