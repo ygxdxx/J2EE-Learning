@@ -17,18 +17,11 @@
         user.setName("小明");
         user.setSalary(5000);
         user.setAddress(address);
+
+        request.setAttribute("user", user);
     %>
 
     ${ requestScope.user.address.city }
 
-    <c:out value="${value}"/>
-
-    <c:set var="" value="" scope="session"/>
-
-    <c:remove var="" scope="session"/>
-
-    <c:url value="el.jsp">
-        <c:param name="key" value="value"/>
-    </c:url>
 </body>
 </html>
