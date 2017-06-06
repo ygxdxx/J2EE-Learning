@@ -72,5 +72,6 @@
         ${status.count}
         <br/>
     </c:forEach>
+
 </body>
 </html>
