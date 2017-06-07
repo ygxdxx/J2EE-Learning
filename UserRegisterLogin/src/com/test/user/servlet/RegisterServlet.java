@@ -1,7 +1,7 @@
 package com.test.user.servlet;
 
 import com.test.user.entity.User;
-import com.test.user.service.UserException;
+import com.test.user.exception.UserException;
 import com.test.user.service.UserService;
 import org.apache.commons.beanutils.BeanUtils;
 import javax.servlet.ServletException;
@@ -17,7 +17,8 @@ import java.util.Map;
  * email: wangsongyan921@163.com
  */
 @WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
-public class RegisterServlet extends HttpServlet {
+public class
+RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
@@ -30,7 +31,7 @@ public class RegisterServlet extends HttpServlet {
         user.setPassword(request.getParameter("password"));
         try {
             userService.register(user);
-            response.getWriter().print("<h1>注册成功</h1><a href='" + request.getContextPath() + "/user/login.jsp/" + "'>点击这里登录</a>");
+            response.getWriter().print("    <h1>注册成功</h1>   <a href='" + request.getContextPath() + "/user/login.jsp/" + "'>点击这里登录</a>     ");
         } catch (UserException e) {
             request.setAttribute("errMsg", e.getMessage());
             request.getRequestDispatcher("/user/register.jsp").forward(request, response);

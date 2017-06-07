@@ -2,6 +2,7 @@ package com.test.user.service;
 
 import com.test.user.dao.UserDao;
 import com.test.user.entity.User;
+import com.test.user.exception.UserException;
 
 /**
  * Created by wangsongyan on 2017/6/5.

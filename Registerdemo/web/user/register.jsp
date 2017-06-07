@@ -11,10 +11,20 @@
     <title>注册</title>
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}+/RegisterServlet" method="post">
-        <span>用户名：</span><input type="text" name="username">
-        <span>用户名</span><input type="text" name="password">
-        <input type="submit" value="提交">
+    <h1 color="red">${requestScope.errMsg}</h1>
+    <form action="${pageContext.request.contextPath}/RegisterServlet" method="post">
+        <span>用户名：</span><input type="text" name="username" value="${requestScope.user.username}"><br>
+        <span>密码：</span><input type="text" name="password" value="${requestScope.user.password}"><br>
+        <span>验证码：</span><input type="text" name="verifyCode" value="${sessionScope.verifyCode}" size="5">
+        <img src="/VerifyCodeServlet" alt="" id="verifyCode" onclick="changeImg()">
+        <br>
+        <input type="submit" value="注册">
     </form>
 </body>
+<script>
+    function changeImg() {
+        var img = document.getElementById("verifyCode");
+        img.setAttribute("src", "/VerifyCodeServlet?time=" + new Date().getTime());
+    }
+</script>
 </html>

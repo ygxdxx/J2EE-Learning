@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <users> 
-  <user username="小红" password="123"/>  
-  <user username="sss" password="11111"/>  
-  <user username="小明" password="123456"/>
+  <user username="张三" password="123456"/>  
+  <user username="小刚" password="123"/>
 </users>

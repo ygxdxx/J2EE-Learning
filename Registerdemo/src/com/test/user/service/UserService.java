@@ -11,9 +11,15 @@ public class UserService {
 
     private UserDao userDao = new UserDao();
 
-    public void register(User user){
+    public void register(User user) throws UserException {
         User _user = userDao.findUserByName(user.getUsername());
-
+        if (_user != null) {
+            //添加失败
+            throw new UserException("用户已经存在");
+        } else {
+            //添加成功
+            userDao.addUser(user);
+        }
     }
 }
 

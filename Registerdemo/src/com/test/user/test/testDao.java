@@ -2,6 +2,7 @@ package com.test.user.test;
 
 import com.test.user.dao.UserDao;
 import com.test.user.entity.User;
+import com.test.user.util.CommonUtils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,5 +24,10 @@ public class testDao {
         user.setPassword("123456");
         user.setUsername("小明");
         userDao.addUser(user);
+    }
+
+    @Test
+    public void testUUID(){
+        System.out.println(CommonUtils.getUUID());
     }
 }

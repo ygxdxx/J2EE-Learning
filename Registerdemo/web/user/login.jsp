@@ -11,10 +11,10 @@
     <title>login</title>
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}+/LoginServlet" method="post">
+    <form action="${pageContext.request.contextPath}/LoginServlet" method="post">
         <span>用户名：</span><input type="text" name="username">
         <span>密码：</span><input type="password" name="password">
-        <input type="submit" value="提交">
+        <input type="submit" value="登录">
     </form>
 </body>
 </html>

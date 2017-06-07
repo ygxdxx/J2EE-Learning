@@ -1,4 +1,4 @@
-package com.test.user.service;
+package com.test.user.exception;
 
 /**
  * Created by wangsongyan on 2017/6/6.
