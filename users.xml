@@ -2,5 +2,6 @@
 
 <users> 
   <user username="小红" password="123"/>  
-  <user username="sss" password="11111"/>
+  <user username="sss" password="11111"/>  
+  <user username="小明" password="123456"/>
 </users>
