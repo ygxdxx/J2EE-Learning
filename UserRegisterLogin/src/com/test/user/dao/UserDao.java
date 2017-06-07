@@ -7,8 +7,6 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 /**
@@ -20,6 +18,7 @@ public class UserDao {
     private String path = "/Users/Cortana/IdeaProjects/JavaWeb/users.xml";
 
     public User findUserByName(String username) {
+        System.out.println("进入测试");
         //1.得到 document
         //2.查询
         //  (1) 如果结果为 null,返回 null
@@ -27,6 +26,7 @@ public class UserDao {
         SAXReader saxReader = new SAXReader();
         try {
             Document document = saxReader.read(path);
+            System.out.println(document);
             Element element = (Element) document.selectSingleNode("//user[@username='" + username + "']");
             if (element == null) {
                 return null;
@@ -39,6 +39,7 @@ public class UserDao {
             return user;
 
         } catch (DocumentException e) {
+            System.out.println("错误");
             throw new RuntimeException(e);
         }
     }

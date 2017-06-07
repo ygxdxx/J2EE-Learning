@@ -4,14 +4,12 @@ import com.test.user.entity.User;
 import com.test.user.service.UserException;
 import com.test.user.service.UserService;
 import org.apache.commons.beanutils.BeanUtils;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 /**
@@ -27,7 +25,9 @@ public class RegisterServlet extends HttpServlet {
 
         UserService userService = new UserService();
         //将表单的数据封装为一个用户对象
-        User user = toBean(request.getParameterMap(), User.class);
+        User user = new User();
+        user.setName(request.getParameter("username"));
+        user.setPassword(request.getParameter("password"));
         try {
             userService.register(user);
             response.getWriter().print("<h1>注册成功</h1><a href='" + request.getContextPath() + "/user/login.jsp/" + "'>点击这里登录</a>");
