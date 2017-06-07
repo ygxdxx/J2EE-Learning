@@ -13,6 +13,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "RegisterServlet",value = "/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

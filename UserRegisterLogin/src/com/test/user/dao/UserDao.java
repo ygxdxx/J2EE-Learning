@@ -39,7 +39,6 @@ public class UserDao {
             return user;
 
         } catch (DocumentException e) {
-            System.out.println("错误");
             throw new RuntimeException(e);
         }
     }
