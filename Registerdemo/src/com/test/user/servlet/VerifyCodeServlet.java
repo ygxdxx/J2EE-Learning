@@ -25,7 +25,9 @@ public class VerifyCodeServlet extends HttpServlet {
         VerifyCodeUtil verifyCodeUtil = new VerifyCodeUtil();
         BufferedImage bufferedImage = verifyCodeUtil.getImage();
         String codeText = verifyCodeUtil.getText();
-        request.getSession().setAttribute("verifyCode", codeText);
-        VerifyCodeUtil.output(bufferedImage,response.getOutputStream());
+        //文本放在 session 域中
+        request.getSession().setAttribute("codeText", codeText);
+        //图片输出到页面上
+        VerifyCodeUtil.output(bufferedImage, response.getOutputStream());
     }
 }

@@ -12,14 +12,27 @@ public class UserService {
     private UserDao userDao = new UserDao();
 
     public void register(User user) throws UserException {
+        //先进行查找
         User _user = userDao.findUserByName(user.getUsername());
         if (_user != null) {
-            //添加失败
+            //用户非空 已存在 抛出异常
             throw new UserException("用户已经存在");
         } else {
-            //添加成功
+            //用户为空 直接添加
             userDao.addUser(user);
         }
+    }
+
+    public User login(User user) throws UserException {
+        User _user = userDao.findUserByName(user.getUsername());
+        if (_user != null) {
+            throw new UserException("用户名不存在");
+        }
+
+        if (!_user.getPassword().equals(user.getPassword())) {
+            throw new UserException("密码错误");
+        }
+        return _user;
     }
 }
 

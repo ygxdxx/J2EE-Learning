@@ -2,5 +2,10 @@
 
 <users> 
   <user username="张三" password="123456"/>  
-  <user username="小刚" password="123"/>
+  <user username="小刚" password="123"/>  
+  <user username="ioioio" password="11111"/>  
+  <user username="ccc" password="234234"/>  
+  <user username="vvvvv" password="66666"/>  
+  <user username="sss" password="11111"/>  
+  <user username="rrtttt" password="11111"/>
 </users>
