@@ -1,6 +1,8 @@
 package com.test.user.service;
 
+import com.test.user.dao.DaoFactory;
 import com.test.user.dao.UserDao;
+import com.test.user.dao.UserDaoImp;
 import com.test.user.entity.User;
 
 /**
@@ -9,7 +11,8 @@ import com.test.user.entity.User;
  */
 public class UserService {
 
-    private UserDao userDao = new UserDao();
+    //factory
+    private UserDao userDao = DaoFactory.getUserDao();
 
     public void register(User user) throws UserException {
         //先进行查找

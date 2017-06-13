@@ -1,6 +1,6 @@
 package com.test.user.test;
 
-import com.test.user.dao.UserDao;
+import com.test.user.dao.UserDaoImp;
 import com.test.user.entity.User;
 import com.test.user.util.CommonUtils;
 import org.junit.jupiter.api.Test;
@@ -13,17 +13,17 @@ public class testDao {
 
     @Test
     public void testFind() {
-        UserDao userDao = new UserDao();
-        System.out.println(userDao.findUserByName("小明"));
+        UserDaoImp userDaoImp = new UserDaoImp();
+        System.out.println(userDaoImp.findUserByName("小明"));
     }
 
     @Test
     public void testAdd() {
-        UserDao userDao = new UserDao();
+        UserDaoImp userDaoImp = new UserDaoImp();
         User user = new User();
         user.setPassword("123456");
         user.setUsername("小明");
-        userDao.addUser(user);
+        userDaoImp.addUser(user);
     }
 
     @Test
