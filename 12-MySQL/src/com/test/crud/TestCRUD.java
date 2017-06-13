@@ -1,7 +1,9 @@
 package com.test.crud;
 
+import com.test.util.JdbcUtils;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.sql.*;
 
 /**
@@ -86,5 +88,81 @@ class TestCRUD {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Test
+    public void func4() {
+        String driverClassName = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://localhost:3306/test2?useSSL=false";
+        String username = "root";
+        String password = "123";
+
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            Class.forName(driverClassName);
+            connection = DriverManager.getConnection(url, username, password);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM emp";
+            resultSet = statement.executeQuery(sql);
+            int count = resultSet.getMetaData().getColumnCount();
+            while (resultSet.next()) {
+                for (int i = 1; i <= count; i++) {
+                    System.out.print(resultSet.getString(i));
+                    if (i < count) {
+                        System.out.print(",");
+                    }
+                }
+                System.out.println();
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Test
+    public boolean func5(String name, String word) throws ClassNotFoundException, SQLException {
+        String driverClassName = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://localhost:3306/test2?useSSL=false";
+        String username = "root";
+        String password = "123";
+        String sql = "SELECT * FROM stu WHERE username=? AND password =?";
+
+        Class.forName(driverClassName);
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, word);
+        ResultSet rs = preparedStatement.executeQuery();
+
+        return rs.next();
+    }
+
+    @Test
+    public void func6() throws SQLException, ClassNotFoundException {
+        String username = "";
+        String password = "";
+        func5(username, password);
+    }
+
+    @Test
+    public void func7() throws SQLException, IOException, ClassNotFoundException {
+        Connection connection = JdbcUtils.getConnection();
+        System.out.println(connection);
     }
 }
