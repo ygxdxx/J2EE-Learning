@@ -18,7 +18,7 @@ public class JdbcUserDaoImpl implements UserDao {
     public User findUserByName(String username) {
         Connection connection = null;
         PreparedStatement ps = null;
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             InputStream is = new FileInputStream("dbconfig.properties");
             Properties properties = new Properties();

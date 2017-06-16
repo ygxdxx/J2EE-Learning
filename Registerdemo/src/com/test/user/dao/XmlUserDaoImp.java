@@ -15,7 +15,7 @@ import java.io.OutputStreamWriter;
  * Created by wangsongyan on 2017/6/7.
  * email: wangsongyan921@163.com
  */
-public class UserDaoImp implements UserDao {
+public class XmlUserDaoImp implements UserDao {
 
     private String path = "/Users/Cortana/IdeaProjects/JavaWeb/users.xml";
 
