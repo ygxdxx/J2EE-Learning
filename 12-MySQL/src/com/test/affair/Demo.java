@@ -19,6 +19,7 @@ public class Demo {
             //start affair
             connection.setAutoCommit(false);
 
+            //DAO
             AccountDao accountDao = new AccountDao();
             accountDao.updateBalance(connection,from, -money);
             accountDao.updateBalance(connection,to, money);

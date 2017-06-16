@@ -1,6 +1,5 @@
 package com.test.affair;
 
-import com.test.util.JdbcUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
