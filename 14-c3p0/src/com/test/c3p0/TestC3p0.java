@@ -1,7 +1,6 @@
 package com.test.c3p0;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.mchange.v2.c3p0.jboss.C3P0PooledDataSource;
 import org.junit.jupiter.api.Test;
 
 import javax.naming.NamingException;
