@@ -35,4 +35,12 @@ public class TestC3p0 {
 
         connection.close();
     }
+
+    @Test
+    public void fun2() throws SQLException {
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        Connection connection = dataSource.getConnection();
+        System.out.println(connection);
+        connection.close();
+    }
 }
