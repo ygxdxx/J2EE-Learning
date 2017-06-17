@@ -1,5 +1,6 @@
 package com.test.dbcp;
 
+import com.test.dbcp.wrapper.MyConnection;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.jupiter.api.Test;
 
@@ -31,8 +32,13 @@ public class TestDBCP {
         dataSource.setMaxWaitMillis(1000);
 
         Connection connection = dataSource.getConnection();
-        System.out.println(connection.getClass().getName());
+        Connection connection1 = new MyConnection(connection);
 
-        connection.close();
+        System.out.println(connection.getClass().getName());
+        System.out.println(connection1.getClass().getName());
+
+        System.out.println("-----");
+
+        connection1.close();
     }
 }
