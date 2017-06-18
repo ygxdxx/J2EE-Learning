@@ -13,10 +13,10 @@ public class AccountDao {
 
     public void update(String name, double money) throws SQLException {
 
-        QueryRunner queryRunner = new TxQueryRunner();
-        String sql = "UPDATE account SET balance = balance+? WHERE name = money";
+        TxQueryRunner queryRunner = new TxQueryRunner();
+        String sql = "UPDATE account SET balance=balance+? WHERE name=?";
         Object[] params = {money, name};
 
-        queryRunner.update(sql, params);
+        queryRunner.update2(sql, params);
     }
 }

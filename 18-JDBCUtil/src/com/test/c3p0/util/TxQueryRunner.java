@@ -1,9 +1,7 @@
 package com.test.c3p0.util;
 
-import com.test.c3p0.util.JdbcUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
-
 import java.sql.*;
 
 /**
@@ -28,8 +26,7 @@ public class TxQueryRunner extends QueryRunner {
         return result;
     }
 
-    @Override
-    public int update(String sql, Object param) throws SQLException {
+    public int update2(String sql, Object param) throws SQLException {
         Connection connection = JdbcUtils.getConnection();
         int result = super.update(connection, sql, param);
         JdbcUtils.releaseConnection(connection);

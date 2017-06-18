@@ -15,39 +15,48 @@ public class JdbcUtils {
     //c3p0-config.xml is necessary
     private static ComboPooledDataSource dataSource = new ComboPooledDataSource();
 
-    private static Connection connection = null;
+    private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
 
     public static Connection getConnection() throws SQLException {
-        if (dataSource != null) {
+        //get connection of current thread
+        Connection connection = tl.get();
+        if (connection != null) {
             return connection;
         }
         return dataSource.getConnection();
     }
 
     public static void beginTransaction() throws SQLException {
+        Connection connection = tl.get();
         if (connection != null) {
             throw new RuntimeException("已经开启事务，不要反复开启");
         }
         connection = getConnection();
         connection.setAutoCommit(false);
+        //save connection of current thread
+        tl.set(connection);
     }
 
     public static void commitTransaction() throws SQLException {
+        Connection connection = tl.get();
         if (connection == null) {
             throw new RuntimeException("还没有开启事务,不能提交");
         }
         connection.commit();
         connection.close();
-        connection = null;
+        //remove connection of current thread
+        tl.remove();
     }
 
     public static void rollbackTransaction() throws SQLException {
+        Connection connection = tl.get();
         if (connection == null) {
             throw new RuntimeException("还没有开启事务，无法回滚");
         }
         connection.rollback();
         connection.close();
-        connection = null;
+
+        tl.remove();
     }
 
     public static void releaseConnection(Connection connection) throws SQLException {
