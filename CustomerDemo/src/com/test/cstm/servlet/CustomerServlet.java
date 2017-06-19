@@ -11,7 +11,7 @@ import java.io.IOException;
  * Created by wangsongyan on 2017/6/18.
  * email: wangsongyan921@163.com
  */
-@WebServlet(name = "CustomerServlet")
+@WebServlet(name = "CustomerServlet",value = "/CustomerServlet")
 public class CustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
