@@ -5,6 +5,7 @@ package com.test.cstm.entity;
  * email: wangsongyan921@163.com
  */
 public class Customer {
+
     private String cid;
     private String cname;
     private String gender;
