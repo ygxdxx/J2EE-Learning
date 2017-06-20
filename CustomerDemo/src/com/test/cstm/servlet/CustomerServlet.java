@@ -1,6 +1,7 @@
 package com.test.cstm.servlet;
 
 import cn.itcast.commons.CommonUtils;
+import cn.itcast.servlet.BaseServlet;
 import com.test.cstm.entity.Customer;
 import com.test.cstm.service.CustomerService;
 
@@ -16,12 +17,11 @@ import java.io.IOException;
  * email: wangsongyan921@163.com
  */
 @WebServlet(name = "CustomerServlet", value = "/CustomerServlet")
-public class CustomerServlet extends HttpServlet {
+public class CustomerServlet extends BaseServlet {
 
     private CustomerService customerService = new CustomerService();
 
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected String add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         /**
          * 1.封装表单数据到Customer
          * 2.补全cid,使用UUID
@@ -33,5 +33,6 @@ public class CustomerServlet extends HttpServlet {
         customer.setCid(CommonUtils.uuid());
         customerService.add(customer);
         req.setAttribute("msg","恭喜,添加客户成功!");
+        return "f:msg.jsp";
     }
 }
