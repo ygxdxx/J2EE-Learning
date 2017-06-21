@@ -1,4 +1,4 @@
-package com.test.util;
+package com.test.util2;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -7,41 +7,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by wangsongyan on 2017/6/20.
+ * Created by wangsongyan on 2017/6/21.
  * email: wangsongyan921@163.com
  */
-public class QR {
+public class QRunner {
 
-    private DataSource dataSource;
+    private DataSource dataSource = null;
 
-    public QR() {
-    }
-
-    public QR(DataSource dataSource) {
+    public QRunner(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    private void initParams(PreparedStatement ps, Object... params) throws SQLException {
+    public void initParams(PreparedStatement ps, Object... params) throws SQLException {
         for (int i = 0; i < params.length; i++) {
             ps.setObject(i + 1, params[i]);
         }
     }
 
-    public int update(String sql, Object... params) {
-
+    public void update(String sql, Object... params) {
         Connection connection = null;
         PreparedStatement ps = null;
-
         try {
-            //连接池得到连接
             connection = dataSource.getConnection();
-            //使用sql创建ps
             ps = connection.prepareStatement(sql);
-            //初始化参数
             initParams(ps, params);
-            return ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException("更新数据异常");
         } finally {
             try {
                 if (ps != null) {
@@ -50,44 +42,30 @@ public class QR {
                 if (connection != null) {
                     connection.close();
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
             }
         }
+
     }
 
-    public <T> T query(String sql, RsHandler<T> rsHandler, Object... params) {
+    public Student query(String sql, RsHandler<Student> handler, Object... params) {
 
         Connection connection = null;
         PreparedStatement ps = null;
-        ResultSet rs;
+        ResultSet rs = null;
 
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(sql);
             initParams(ps, params);
-
             rs = ps.executeQuery();
-
-            return rsHandler.handle(rs);
-
+            return handler.handle(rs);
         } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            throw new RuntimeException();
         }
-        return null;
     }
 }
 
 interface RsHandler<T> {
-    T handle(ResultSet rs) throws SQLException;
+    public T handle(ResultSet rs) throws SQLException;
 }

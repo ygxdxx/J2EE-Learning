@@ -42,14 +42,11 @@ public class Demo {
         QR qr = new QR(JdbcUtil.getDataSource());
         String sql = "SELECT * FROM stu WHERE username = ?";
         Object[] params = {username};
-        return qr.query(sql, rs -> {
-            Student student = new Student();
-            if (!rs.next()){
+        return qr.query(sql, new RsHandler<Student>() {
+            @Override
+            public Student handle(ResultSet rs) throws SQLException {
                 return null;
             }
-            student.setUsername(rs.getString("username"));
-            student.setAge(rs.getInt("age"));
-            return student;
         }, params);
     }
 
@@ -77,38 +74,4 @@ public class Demo {
             }
         }
     }
-
-  /*  @Test
-    public Student load(String username) {
-
-        Connection connection = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Student student = new Student();
-        try {
-            connection = JdbcUtil.getConnection();
-            String sql = "SELECT * FROM stu WHERE username=?";
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, username);
-
-            rs = ps.executeQuery();
-
-            if (!rs.next()) {
-                return null;
-            }
-
-            student.setUsername(rs.getString("username"));
-            student.setAge(rs.getInt("age"));
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                ps.close();
-                connection.close();
-            } catch (SQLException e) {
-            }
-        }
-        return student;
-    }*/
 }
