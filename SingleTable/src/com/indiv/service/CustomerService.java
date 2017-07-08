@@ -2,8 +2,8 @@ package com.indiv.service;
 
 import com.indiv.dao.CustomerDao;
 import com.indiv.entity.Customer;
+import com.indiv.entity.PageBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,9 +18,9 @@ public class CustomerService {
         customerDao.add(customer);
     }
 
-    public List<Customer> findAll() {
-        return customerDao.findAll();
-    }
+//    public List<Customer> findAll() {
+//        return customerDao.findAll();
+//    }
 
     public Customer load(String cid) {
         return customerDao.load(cid);
@@ -30,11 +30,15 @@ public class CustomerService {
         customerDao.edit(customer);
     }
 
-    public void delete(String cid) {
-        customerDao.delete(cid);
-    }
+//    public void delete(String cid) {
+//        customerDao.delete(cid);
+//    }
 
     public List<Customer> query(Customer criteria) {
         return customerDao.query(criteria);
+    }
+
+    public PageBean<Customer> findAll(int pc, int ps) {
+        return customerDao.findAll(pc,ps);
     }
 }

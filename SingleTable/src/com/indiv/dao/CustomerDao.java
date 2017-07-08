@@ -2,8 +2,10 @@ package com.indiv.dao;
 
 import cn.itcast.jdbc.TxQueryRunner;
 import com.indiv.entity.Customer;
+import com.indiv.entity.PageBean;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,14 +28,14 @@ public class CustomerDao {
         }
     }
 
-    public List<Customer> findAll() {
-        try {
-            String sql = "SELECT * FROM t_customer ORDER BY cname";
-            return queryRunner.query(sql, new BeanListHandler<Customer>(Customer.class));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public List<Customer> findAll() {
+//        try {
+//            String sql = "SELECT * FROM t_customer ORDER BY cname";
+//            return queryRunner.query(sql, new BeanListHandler<>(Customer.class));
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 
     public Customer load(String cid) {
@@ -55,10 +57,10 @@ public class CustomerDao {
         }
     }
 
-    public void delete(String cid) {
-        String sql = "DELETE FROM t_customer WHERE cid=?";
+//    public void delete(String cid) {
+//        String sql = "DELETE FROM t_customer WHERE cid=?";
 //        queryRunner
-    }
+//    }
 
     public List<Customer> query(Customer criteria) {
         StringBuilder sql = new StringBuilder("SELECT * FROM t_customer WHERE 1=1 ");
@@ -91,6 +93,24 @@ public class CustomerDao {
         try {
             return queryRunner.query(sql.toString(), new BeanListHandler<Customer>(Customer.class), params.toArray());
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public PageBean<Customer> findAll(int pc, int ps) {
+        try {
+            PageBean<Customer> pageBean = new PageBean<>();
+            pageBean.setPc(pc);
+            pageBean.setPs(ps);
+            String sql = "SELECT count(*) FROM t_customer";
+            Number number = queryRunner.query(sql, new ScalarHandler<>());
+            int tr = number.intValue();
+            pageBean.setTr(tr);
+            sql = "SELECT * FROM t_customer ORDER BY cname LIMIT ?,?";
+            List<Customer> beanList = queryRunner.query(sql, new BeanListHandler<>(Customer.class), (pc - 1) * ps, ps);
+            pageBean.setBeanList(beanList);
+            return pageBean;
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
