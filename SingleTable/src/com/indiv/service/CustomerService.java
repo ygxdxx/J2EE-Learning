@@ -34,11 +34,15 @@ public class CustomerService {
 //        customerDao.delete(cid);
 //    }
 
-    public List<Customer> query(Customer criteria) {
-        return customerDao.query(criteria);
+//    public List<Customer> query(Customer criteria) {
+//        return customerDao.query(criteria);
+//    }
+
+    public PageBean<Customer> query(Customer criteria, int pc, int ps) {
+        return customerDao.query(criteria, pc, ps);
     }
 
     public PageBean<Customer> findAll(int pc, int ps) {
-        return customerDao.findAll(pc,ps);
+        return customerDao.findAll(pc, ps);
     }
 }

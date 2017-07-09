@@ -30,7 +30,7 @@
             <th>操作</th>
         </tr>
 
-        <c:forEach items="${requestScope.pageBean.beanList}" var="cstm">
+        <c:forEach items="${pageBean.beanList}" var="cstm">
             <tr>
                 <td>${cstm.cname }</td>
                 <td>${cstm.gender }</td>
@@ -45,12 +45,14 @@
             </tr>
         </c:forEach>
     </table>
+
     <div style="text-align: center;">
         <span>第${pageBean.pc}页/共${pageBean.tp}页</span>
-        <a href="<c:url value="/CustomerServlet?method=findAll&pc=1"/>">首页</a>
+        <a href="${pageBean.url}&pc=1">首页</a>
         <c:if test="${pageBean.pc >1}">
-            <a href="<c:url value="/CustomerServlet?method=findAll&pc=${pageBean.pc-1}"/>">上一页</a>
+            <a href="<c:url value="${pageBean.url}&pc=${pageBean.pc-1}"/>">上一页</a>
         </c:if>
+
         <%--页码列表--%>
         <c:choose>
             <%-- 页数小于10 --%>
@@ -74,20 +76,22 @@
                 </c:if>
             </c:otherwise>
         </c:choose>
+
         <c:forEach var="i" begin="${begin}" end="${end}">
             <c:choose>
                 <c:when test="${i eq pageBean.pc}">
                     <span>${i}</span>
                 </c:when>
                 <c:otherwise>
-                    <a href="<c:url value='/CustomerServlet?method=findAll&pc=${i}'/>">${i }</a>
+                    <a href="<c:url value='${pageBean.url}&pc=${i}'/>">${i }</a>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
+
         <c:if test="${pageBean.pc < pageBean.tp}">
-            <a href="<c:url value="/CustomerServlet?method=findAll&pc=${pageBean.pc+1}"/>">下一页</a>
+            <a href="<c:url value="${pageBean.url}&pc=${pageBean.pc+1}"/>">下一页</a>
         </c:if>
-        <a href="<c:url value="/CustomerServlet?method=findAll&pc=${pageBean.tp}"/>">尾页</a>
+        <a href="<c:url value="${pageBean.url}&pc=${pageBean.tp}"/>">尾页</a>
     </div>
 </body>
 </html>

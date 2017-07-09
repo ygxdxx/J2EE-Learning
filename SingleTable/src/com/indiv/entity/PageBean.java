@@ -14,6 +14,16 @@ public class PageBean<T> {
     private int ps;//每页的记录数 page size
     private List<T> beanList; //当前页的记录
 
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public int getPc() {
         return pc;
     }

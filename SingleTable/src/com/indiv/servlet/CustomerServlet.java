@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,8 @@ public class CustomerServlet extends BaseServlet {
         int pc = getPageCurrent(request);//获取pc
         int ps = 10; //给定ps的值
         PageBean<Customer> pageBean = customerService.findAll(pc, ps);//传递ps、pc给Service得到 PageBean
+        //设置url
+        pageBean.setUrl(getUrl(request));
         request.setAttribute("pageBean", pageBean);
         return "f:/list.jsp";
     }
@@ -88,11 +91,66 @@ public class CustomerServlet extends BaseServlet {
     }
 
 
-    public String query(HttpServletRequest request, HttpServletResponse response) {
+//    public String query(HttpServletRequest request, HttpServletResponse response) {
+//        Customer criteria = CommonUtils.toBean(request.getParameterMap(), Customer.class);
+//        List<Customer> arrayList = customerService.query(criteria);
+//        request.setAttribute("cstmList", arrayList);
+//        return "f:/list.jsp";
+//    }
+
+    public String query(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+
+        /**
+         * 1.得到pc
+         * 2.得到ps
+         * 3.调用service得到pageBean
+         * 4.将pageBean保存到request域中
+         * 5.转发到list.jsp
+         */
+        //获取查询条件
         Customer criteria = CommonUtils.toBean(request.getParameterMap(), Customer.class);
-        List<Customer> arrayList = customerService.query(criteria);
-        request.setAttribute("cstmList", arrayList);
+
+        //处理GET编码问题
+        criteria = encoding(criteria);
+
+        int pc = getPageCurrent(request);
+        int ps = 10;
+        PageBean<Customer> pageBean = customerService.query(criteria, pc, ps);
+
+        pageBean.setUrl(getUrl(request));
+
+        request.setAttribute("pageBean", pageBean);
         return "f:/list.jsp";
+    }
+
+    //因为是GET请求，所以需要转码
+    private Customer encoding(Customer criteria) throws UnsupportedEncodingException {
+        String cname = criteria.getCname();
+        String gender = criteria.getGender();
+        String cellPhone = criteria.getCellphone();
+        String email = criteria.getEmail();
+
+        if (cname != null && cname.trim().isEmpty()) {
+            cname = new String(cname.getBytes("ISO-8859-1"), "utf-8");
+            criteria.setCname(cname);
+        }
+
+        if (gender != null && gender.trim().isEmpty()) {
+            gender = new String(gender.getBytes("ISO-8859-1"), "utf-8");
+            criteria.setGender(gender);
+        }
+
+        if (cellPhone != null && cellPhone.trim().isEmpty()) {
+            cellPhone = new String(cellPhone.getBytes("ISO-8859-1"), "utf-8");
+            criteria.setCellphone(cellPhone);
+        }
+
+        if (email != null && email.trim().isEmpty()) {
+            email = new String(email.getBytes("ISO-8859-1"), "utf-8");
+            criteria.setEmail(email);
+        }
+
+        return criteria;
     }
 
 //    public String delete(HttpServletRequest request, HttpServletResponse response) {
@@ -102,4 +160,23 @@ public class CustomerServlet extends BaseServlet {
 //        return "f:/msg.jsp";
 //    }
 
+    /**
+     * 截取url
+     *
+     * @param request
+     * @return
+     */
+    private String getUrl(HttpServletRequest request) {
+        String contextPath = request.getContextPath(); //项目名
+        String servletPath = request.getServletPath(); //Servlet路径 即/CustomerServlet
+        String queryString = request.getQueryString(); //查询参数 ?之后的部分
+
+        //判断是否包含pc这个参数，如果包含则截取下去
+        if (queryString.contains("&pc=")) {
+            int index = queryString.lastIndexOf("&pc=");
+            queryString = queryString.substring(0, index);
+        }
+        //不包含问号
+        return contextPath + servletPath + "?" + queryString;
+    }
 }
